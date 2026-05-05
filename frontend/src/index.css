@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  /* Dark Theme (Default) */
+  --bg-primary: #0c0c0e;
+  --bg-secondary: #18181b;
+  --text-main: #f4f4f5;
+  --text-muted: #71717a;
+  --border-color: #27272a;
+  --accent: #d97706; /* Amber-600 */
+}
+
+[data-theme='light'] {
+  --bg-primary: #fafaf9;
+  --bg-secondary: #ffffff;
+  --text-main: #1c1917;
+  --text-muted: #78716c;
+  --border-color: #e7e5e4;
+  --accent: #b45309; /* Amber-700 */
+  
+  /* Intro-specific light theme colors */
+  --intro-bg: #FDFCFB;
+  --intro-text: #1A1C1E;
+  --intro-text-muted: #64748b;
+  --intro-accent: #BDA371;
+  --intro-accent-light: rgba(189, 163, 113, 0.08);
+  --intro-nav-bg: rgba(255, 255, 255, 0.7);
+  --intro-nav-border: rgba(189, 163, 113, 0.1);
+  --intro-link-text: rgba(26, 28, 30, 0.6);
+  --intro-image-bg: #F7F4F0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Custom Scrollbar for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) var(--bg-primary);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  scrollbar-color: var(--accent) var(--bg-primary);
+}
+
+/* Toast animations */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}

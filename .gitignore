@@ -1,0 +1,22 @@
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Build outputs
+dist/
+dist-ssr/

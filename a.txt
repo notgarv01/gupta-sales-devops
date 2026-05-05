@@ -1,0 +1,110 @@
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Collection from '../pages/Intro/Collection'; // The Index component we built
+
+const HomePage = () => {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll();
+  
+  // Parallax effects for a "lengthy" feeling
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  const textX = useTransform(scrollYProgress, [0.1, 0.4], ['0%', '-50%']);
+
+  return (
+    <div className="bg-zinc-950 text-zinc-100 selection:bg-amber-500/30">
+      
+      {/* 1. HERO SECTION - Cinematic & Minimal */}
+      <motion.section 
+        style={{ opacity, scale }}
+        className="sticky top-0 h-screen flex flex-col justify-center items-center z-0"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-900/10 via-transparent to-transparent opacity-50" />
+        
+        <motion.span 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-amber-500 text-[10px] tracking-[0.6em] uppercase mb-6"
+        >
+          Since 1994
+        </motion.span>
+        
+        <h1 className="text-[15vw] font-serif italic leading-none tracking-tighter text-center">
+          Gupta <span className="text-zinc-800">Sales.</span>
+        </h1>
+        
+        <div className="mt-12 flex flex-col items-center gap-4 opacity-40">
+          <p className="text-[10px] uppercase tracking-widest">Scroll to Begin</p>
+          <div className="w-[1px] h-16 bg-gradient-to-b from-zinc-100 to-transparent" />
+        </div>
+      </motion.section>
+
+      {/* 2. PHILOSOPHY - Horizontal Marquee (Adds length & motion) */}
+      <section className="relative h-[50vh] bg-zinc-950 z-10 flex items-center overflow-hidden border-y border-zinc-900">
+        <motion.div style={{ x: textX }} className="flex whitespace-nowrap gap-20">
+          <h2 className="text-[10vw] font-serif uppercase text-zinc-900">
+            Purity. Tradition. Quality. Essence. Purity. Tradition. Quality. Essence.
+          </h2>
+        </motion.div>
+      </section>
+
+      {/* 3. THE COLLECTION INDEX (Using the style from the previous turn) */}
+      <section id="collection" className="relative z-10 bg-zinc-950">
+        <Collection />
+      </section>
+
+      {/* 4. HERITAGE - Deep Storytelling */}
+      <section className="relative min-h-screen py-40 px-12 flex flex-col justify-center bg-zinc-900/30">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+          <div>
+            <h3 className="text-4xl font-serif mb-8 italic">Three Decades of <br/> Unwavering Trust.</h3>
+            <p className="text-zinc-500 leading-relaxed text-sm">
+              We started with a single goal: to bring the authentic taste of Indian gardens to every household. 
+              Our Chai is not just a beverage; it’s a morning ritual. Our Mehendi isn’t just color; it’s a celebration.
+            </p>
+          </div>
+          <div className="relative">
+             <div className="aspect-[4/5] bg-zinc-800 border border-zinc-700 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1544787210-2211d44b86c9?q=80&w=1000" 
+                  className="w-full h-full object-cover grayscale brightness-50" 
+                  alt="Process"
+                />
+             </div>
+             {/* Floating Label */}
+             <div className="absolute -bottom-6 -left-6 bg-amber-500 p-8 text-zinc-950">
+                <p className="text-4xl font-serif font-bold italic">1994</p>
+                <p className="text-[10px] uppercase tracking-widest font-bold">The Origin</p>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FOOTER CTA */}
+      <footer className="py-40 bg-zinc-950 border-t border-zinc-900 text-center relative overflow-hidden">
+        <motion.h4 
+          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 100, opacity: 0 }}
+          className="text-[12vw] font-serif italic text-zinc-900 mb-10"
+        >
+          Shop Now.
+        </motion.h4>
+        
+        <div className="flex flex-col items-center gap-8 relative z-10">
+          <button className="px-16 py-6 bg-amber-500 text-zinc-950 text-xs font-bold uppercase tracking-[0.3em] hover:bg-zinc-100 transition-colors">
+            Enter the Store
+          </button>
+          
+          <div className="flex gap-12 text-[10px] text-zinc-600 uppercase tracking-widest mt-20">
+            <a href="#" className="hover:text-zinc-100 transition-colors">Instagram</a>
+            <a href="#" className="hover:text-zinc-100 transition-colors">Twitter</a>
+            <a href="#" className="hover:text-zinc-100 transition-colors">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default HomePage;
